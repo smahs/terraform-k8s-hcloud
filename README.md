@@ -3,6 +3,7 @@
 - Adapted for `containerd` and `systemd` `cgroup` provider (removed `docker`).
 - UFW firewall (may need some more finetuning, but its not for production use anyway).
 - Replaced Calico with Flannel (enabled by default).
+- Added deployment of `metrics-server`
 - Defaults for leaner and cheaper setup (CX11 instance types with 1 vCPU).
 - Added option for `hcloud` datacenter location (default Helsinki).
 - Syntax changes and cleanup of unused variables (`docker` and `kube*` versions)

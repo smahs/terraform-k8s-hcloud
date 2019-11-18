@@ -24,6 +24,7 @@ ufw allow https
 ufw allow 10250         # kubelet
 ufw allow 8285/udp      # flannel
 ufw allow 8472/udp      # flannel
+ufw allow 4443          # metrics-server
 echo "y" | ufw enable
 
 #######################################################
