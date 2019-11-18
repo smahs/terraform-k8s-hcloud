@@ -1,5 +1,6 @@
 #!/bin/bash
 set -eu
+
 SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY:-}
 SSH_USERNAME=${SSH_USERNAME:-}
 SSH_HOST=${SSH_HOST:-}

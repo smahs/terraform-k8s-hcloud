@@ -8,6 +8,7 @@ resource "hcloud_ssh_key" "k8s_admin" {
 }
 
 resource "hcloud_server" "master" {
+  location    = var.location
   count       = var.master_count
   name        = "master-${count.index + 1}"
   server_type = var.master_type
@@ -21,17 +22,12 @@ resource "hcloud_server" "master" {
   }
 
   provisioner "file" {
-    source      = "files/10-kubeadm.conf"
-    destination = "/root/10-kubeadm.conf"
-  }
-
-  provisioner "file" {
     source      = "scripts/bootstrap.sh"
     destination = "/root/bootstrap.sh"
   }
 
   provisioner "remote-exec" {
-    inline = ["DOCKER_VERSION=${var.docker_version} KUBERNETES_VERSION=${var.kubernetes_version} bash /root/bootstrap.sh"]
+    inline = ["/bin/bash /root/bootstrap.sh"]
   }
 
   provisioner "file" {
@@ -40,11 +36,11 @@ resource "hcloud_server" "master" {
   }
 
   provisioner "remote-exec" {
-    inline = ["FEATURE_GATES=${var.feature_gates} bash /root/master.sh"]
+    inline = ["FEATURE_GATES=${var.feature_gates} /bin/bash /root/master.sh"]
   }
 
   provisioner "local-exec" {
-    command = "bash scripts/copy-kubeadm-token.sh"
+    command = "/bin/bash scripts/copy-kubeadm-token.sh"
 
     environment = {
       SSH_PRIVATE_KEY = var.ssh_private_key
@@ -56,6 +52,7 @@ resource "hcloud_server" "master" {
 }
 
 resource "hcloud_server" "node" {
+  location    = var.location
   count       = var.node_count
   name        = "node-${count.index + 1}"
   server_type = var.node_type
@@ -70,17 +67,12 @@ resource "hcloud_server" "node" {
   }
 
   provisioner "file" {
-    source      = "files/10-kubeadm.conf"
-    destination = "/root/10-kubeadm.conf"
-  }
-
-  provisioner "file" {
     source      = "scripts/bootstrap.sh"
     destination = "/root/bootstrap.sh"
   }
 
   provisioner "remote-exec" {
-    inline = ["DOCKER_VERSION=${var.docker_version} KUBERNETES_VERSION=${var.kubernetes_version} bash /root/bootstrap.sh"]
+    inline = ["/bin/bash /root/bootstrap.sh"]
   }
 
   provisioner "file" {
@@ -101,7 +93,7 @@ resource "hcloud_server" "node" {
   }
 
   provisioner "remote-exec" {
-    inline = ["bash /root/node.sh"]
+    inline = ["/bin/bash /root/node.sh"]
   }
 }
 

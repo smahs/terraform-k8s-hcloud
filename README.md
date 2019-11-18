@@ -1,3 +1,13 @@
+# Changes in this fork:
+
+- Adapted for `containerd` and `systemd` `cgroup` provider (removed `docker`).
+- UFW firewall (may need some more finetuning, but its not for production use anyway).
+- Replaced Calico with Flannel (enabled by default).
+- Defaults for leaner and cheaper setup (CX11 instance types with 1 vCPU).
+- Added option for `hcloud` datacenter location (default Helsinki).
+- Syntax changes and cleanup of unused variables (`docker` and `kube*` versions)
+
+
 # Terraform Kubernetes on Hetzner Cloud
 
 This repository will help to setup an opionated Kubernetes Cluster with [kubeadm](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) on [Hetzner Cloud](https://www.hetzner.com/cloud?country=us).

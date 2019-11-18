@@ -1,48 +1,50 @@
 variable "hcloud_token" {
+  description = "Create a project in hcloud and a token"
+}
+
+variable "location" {
+  description = "The location to create the instances in. nbg1, fsn1 or hel1"
+  default     = "hel1"
 }
 
 variable "master_count" {
+  description = "Number of master nodes"
+  default     = 1 
 }
 
 variable "master_image" {
-  description = "Predefined Image that will be used to spin up the machines (Currently supported: ubuntu-16.04, debian-9,centos-7,fedora-27)"
-  default     = "ubuntu-16.04"
+  description = "Machine image that will be used to spin up the instance"
+  default     = "ubuntu-18.04"
 }
 
 variable "master_type" {
   description = "For more types have a look at https://www.hetzner.de/cloud"
-  default     = "cx21"
+  default     = "cx11"
 }
 
 variable "node_count" {
+  description = "Number of worker nodes"
+  default     = 1
 }
 
 variable "node_image" {
-  description = "Predefined Image that will be used to spin up the machines (Currently supported: ubuntu-16.04, debian-9,centos-7,fedora-27)"
-  default     = "ubuntu-16.04"
+  description = "Machine image that will be used to spin up the instance"
+  default     = "ubuntu-18.04"
 }
 
 variable "node_type" {
   description = "For more types have a look at https://www.hetzner.de/cloud"
-  default     = "cx21"
+  default     = "cx11"
 }
 
 variable "ssh_private_key" {
   description = "Private Key to access the machines"
-  default     = "~/.ssh/id_ed25519"
+  default     = "~/.ssh/id_rsa"
 }
 
 variable "ssh_public_key" {
   description = "Public Key to authorized the access for the machines"
-  default     = "~/.ssh/id_ed25519.pub"
-}
-
-variable "docker_version" {
-  default = "19.03"
-}
-
-variable "kubernetes_version" {
-  default = "1.15.5"
+  default     = "~/.ssh/id_rsa.pub"
 }
 
 variable "feature_gates" {
@@ -50,7 +52,7 @@ variable "feature_gates" {
   default     = ""
 }
 
-variable "calico_enabled" {
-  default = false
+variable "flannel_install" {
+  description = "Install Flannel overlay network"
+  default     = true
 }
-
