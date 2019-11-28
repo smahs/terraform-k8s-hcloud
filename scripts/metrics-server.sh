@@ -11,7 +11,7 @@ spec:
           - --cert-dir=/tmp
           - --secure-port=4443
           - --kubelet-insecure-tls
-          - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+          - --kubelet-preferred-address-types=InternalIP
 EOF
 
 git clone https://github.com/kubernetes-incubator/metrics-server.git
